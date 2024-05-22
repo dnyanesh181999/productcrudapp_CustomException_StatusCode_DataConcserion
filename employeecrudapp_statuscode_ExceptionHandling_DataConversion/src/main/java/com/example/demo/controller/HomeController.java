@@ -17,13 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Product;
 import com.example.demo.servicei.HomeServicei;
+
+import jakarta.validation.Valid;
 @RequestMapping("/product")
 @RestController
 public class HomeController {
 @Autowired 
 HomeServicei hs;
 @PostMapping(value="/product",consumes= {"application/json","application/xml"})
-public ResponseEntity<Product>saveProduct(@RequestBody Product product){
+public ResponseEntity<Product>saveProduct(@Valid @RequestBody Product product){
 	if(product.getProductId()<=0) {
 		return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
 	}
